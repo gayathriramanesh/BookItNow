@@ -4,6 +4,7 @@ import com.gayathri.BookItNow.Model.ShowModel;
 import com.gayathri.BookItNow.Service.ShowService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -61,5 +62,10 @@ public class ShowController {
     public ResponseEntity<List<ShowModel>> getShowsByScreenId(@RequestParam String screenId) {
         List<ShowModel> shows = showService.getShowsByScreenId(screenId);
         return new ResponseEntity<>(shows, HttpStatus.OK);
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<String> handleIllegalArgument(IllegalArgumentException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
 }

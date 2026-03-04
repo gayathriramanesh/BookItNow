@@ -15,7 +15,7 @@ public class TheatreServiceImpl implements TheatreService {
     @Override
     public TheatreModel createTheatre(TheatreModel theatreModel) {
         if (getTheatreByName(theatreModel.getTheatreName()) != null) {
-            throw new TheatreAlreadyExistsException("Theatre with this name already exists");
+            throw new TheatreAlreadyExistsException("Theatre with name '" + theatreModel.getTheatreName() + "' already exists.");
         }
         theatres.add(theatreModel);
         return theatreModel;
@@ -25,6 +25,13 @@ public class TheatreServiceImpl implements TheatreService {
     public TheatreModel getTheatreByName(String theatreName) {
         return theatres.stream()
                 .filter(theatre -> theatreName != null && theatreName.equalsIgnoreCase(theatre.getTheatreName()))
+                .findFirst()
+                .orElse(null);
+    }
+    @Override
+    public TheatreModel getTheatreById(String theatreId) {
+        return theatres.stream()
+                .filter(theatre -> theatreId != null && theatreId.equals(theatre.getTheatreId()))
                 .findFirst()
                 .orElse(null);
     }

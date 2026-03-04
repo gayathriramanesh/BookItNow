@@ -48,6 +48,14 @@
 			<artifactId>spring-boot-devtools</artifactId>
 			<optional>true</optional>
 		</dependency>
+		<dependency>
+            <groupId>io.awspring.cloud</groupId>
+           <artifactId>spring-cloud-aws-starter</artifactId>
+      </dependency>
+	  <dependency>
+			<groupId>org.apache.jclouds.api</groupId>
+			<artifactId>s3</artifactId>
+     </dependency>
 	</dependencies>
 
 	<build>

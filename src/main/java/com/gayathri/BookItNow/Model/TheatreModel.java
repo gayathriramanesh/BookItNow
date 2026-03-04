@@ -17,18 +17,14 @@ public class TheatreModel {
     @JsonProperty("theatre_location")
     private String theatreLocation;
 
-    @JsonProperty("screens")
-    private List<Screen> screens;
-
     public TheatreModel() {
     }
 
-    public TheatreModel(Long id, String theatreId, String theatreName, String theatreLocation, List<Screen> screens) {
+    public TheatreModel(Long id, String theatreId, String theatreName, String theatreLocation) {
         this.id = id;
         this.theatreId = theatreId;
         this.theatreName = theatreName;
         this.theatreLocation = theatreLocation;
-        this.screens = screens;
     }
 
     public Long getId() {
@@ -61,13 +57,5 @@ public class TheatreModel {
 
     public void setTheatreLocation(String theatreLocation) {
         this.theatreLocation = theatreLocation;
-    }
-
-    public List<Screen> getScreens() {
-        return screens;
-    }
-
-    public void setScreens(List<Screen> screens) {
-        this.screens = screens;
     }
 }

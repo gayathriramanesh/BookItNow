@@ -7,4 +7,5 @@ public interface TheatreService {
     TheatreModel createTheatre(TheatreModel theatreModel);
 
     TheatreModel getTheatreByName(String theatreName);
+    TheatreModel getTheatreById(String theatreId);
 }

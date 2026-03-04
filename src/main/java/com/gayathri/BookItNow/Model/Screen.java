@@ -13,13 +13,17 @@ public class Screen {
     @JsonProperty("screen_capacity")
     private Integer screenCapacity;
 
+    @JsonProperty("theatre_id")
+    private String theatreId;
+
     public Screen() {
     }
 
-    public Screen(String screenId, String screenName, Integer screenCapacity) {
+    public Screen(String screenId, String screenName, Integer screenCapacity, String theatreId) {
         this.screenId = screenId;
         this.screenName = screenName;
         this.screenCapacity = screenCapacity;
+        this.theatreId = theatreId;
     }
 
     public String getScreenId() {
@@ -44,5 +48,12 @@ public class Screen {
 
     public void setScreenCapacity(Integer screenCapacity) {
         this.screenCapacity = screenCapacity;
+    }
+    public String getTheatreId() {
+        return theatreId;
+    }
+
+    public void setTheatreId(String theatreId) {
+        this.theatreId = theatreId;
     }
 }
