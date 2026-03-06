@@ -27,47 +27,47 @@ public class ShowServiceImpl implements ShowService {
     @Override
     public ShowModel createShow(ShowModel showModel) {
         try {
-            if (showModel.getScreenId() == null || showModel.getScreenId().isBlank()) {
-                throw new IllegalArgumentException("Screen ID is required");
-            }
-            if (showModel.getStartTime() == null) {
-                throw new IllegalArgumentException("Start time is required");
-            }
-            if (showModel.getEndTime() == null) {
-                throw new IllegalArgumentException("End time is required");
-            }
-            if (showModel.getEndTime().isBefore(showModel.getStartTime())) {
-                throw new IllegalArgumentException("End time must be after start time");
-            }
-            if (showModel.getEndTime().isAfter(showModel.getStartTime().plusHours(2))) {
-                throw new IllegalArgumentException("Show duration cannot exceed 2 hours");
-            }
+        if (showModel.getScreenId() == null || showModel.getScreenId().isBlank()) {
+            throw new IllegalArgumentException("Screen ID is required");
+        }
+        if (showModel.getStartTime() == null) {
+            throw new IllegalArgumentException("Start time is required");
+        }
+        if (showModel.getEndTime() == null) {
+            throw new IllegalArgumentException("End time is required");
+        }
+        if (showModel.getEndTime().isBefore(showModel.getStartTime())) {
+            throw new IllegalArgumentException("End time must be after start time");
+        }
+        if (showModel.getEndTime().isAfter(showModel.getStartTime().plusHours(2))) {
+            throw new IllegalArgumentException("Show duration cannot exceed 2 hours");
+        }
             if (showModel.getShowId() == null || showModel.getShowId().isBlank()) {
                 showModel.setShowId(UUID.randomUUID().toString());
-            }
+        }
             if (showModel.getMovieId() == null || showModel.getMovieId().isBlank()) {
                 throw new IllegalArgumentException("Movie ID is required");
 
-            }
-            Movie movie = movieService.getMovieById(showModel.getMovieId());
-            if (movie == null) {
-                throw new IllegalArgumentException("Movie not found");
-            }
-            Screen screen_obj = screenService.getScreenById(showModel.getScreenId());
-            if (screen_obj == null) {
-                throw new IllegalArgumentException("Screen not found");
-            }
-            shows.add(showModel);
-
-            String screenId = screen_obj.getScreenId();
-            if (screenId != null) {
-                if (screen_obj.getScreenCapacity() != null && screen_obj.getScreenCapacity() > 0) {
-                    seatService.createSeatsForShow(screenId, showModel.getShowId(), screen_obj.getScreenCapacity());
-                }
-            }
-
-            return showModel;
         }
+        Movie movie = movieService.getMovieById(showModel.getMovieId());
+        if (movie == null) {
+            throw new IllegalArgumentException("Movie not found");
+        }
+        Screen screen_obj = screenService.getScreenById(showModel.getScreenId());
+        if (screen_obj == null) {
+            throw new IllegalArgumentException("Screen not found");
+        }
+        shows.add(showModel);
+
+        String screenId = screen_obj.getScreenId();
+        if (screenId != null) {
+            if (screen_obj.getScreenCapacity() != null && screen_obj.getScreenCapacity() > 0) {
+                seatService.createSeatsForShow(screenId, showModel.getShowId(), screen_obj.getScreenCapacity());
+            }
+        }
+
+        return showModel;
+    }
         catch (IllegalArgumentException e) {
                 throw new IllegalArgumentException("Failed to create show: " + e.getMessage());
             }

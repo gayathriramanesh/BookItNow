@@ -31,7 +31,7 @@ public class TheatreServiceImpl implements TheatreService {
     @Override
     public TheatreModel getTheatreById(String theatreId) {
         return theatres.stream()
-                .filter(theatre -> theatreId != null && theatreId.equals(theatre.getTheatreId()))
+                .filter(theatre -> theatreId != null && theatreId.equalsIgnoreCase(theatre.getTheatreId()))
                 .findFirst()
                 .orElse(null);
     }
